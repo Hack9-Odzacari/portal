@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return, react/jsx-one-expression-per-line */
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import WeatherIcons from './Weather_icons';
 import { urlLocation } from '../redux/urlLocation/urlLocation';
 
 const City = () => {
@@ -229,11 +228,11 @@ const City = () => {
                       scope="col"
                       className="py-0 text-end d-flex justify-content-end align-items-center"
                     >
-                      <img
+                      {/* <img
                         src={WeatherIcons[city.current.weather.ic]}
                         alt="Weather Description"
                         className=" mb-4 me-2"
-                      />
+                      /> */}
                       <h6 className="text-white mb-4">{weatherDesc()}</h6>
                     </th>
                   </tr>

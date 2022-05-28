@@ -148,7 +148,12 @@
 }
 
 .tabs button:disabled {
-  background: linear-gradient(245.39deg, #FC65ED -35.14%, #0500FF 143.06%);
+  background: linear-gradient(245.39deg, #fc65ed -35.14%, #0500ff 143.06%);
+  color: white;
+}
+
+.headertext {
+  text-align: center;
   color: white;
 }
 

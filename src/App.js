@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Tabs from './components/Tabs';
 import Home from './components/Home';
 import City from './components/City';
 
@@ -18,7 +17,6 @@ function App() {
           </Route>
           <Route path="/">
             <Home />
-            <Tabs />
           </Route>
         </Switch>
       </Router>
