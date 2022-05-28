@@ -16,8 +16,6 @@ const Tabs = (props) => {
 
   function TableTemplate(
     time,
-    locationLatitude,
-    locationLongitude,
     locationName,
     name,
     pms7003measurementPm10Atmo,
@@ -29,8 +27,6 @@ const Tabs = (props) => {
   ) {
     return {
       time,
-      locationLatitude,
-      locationLongitude,
       locationName,
       name,
       pms7003measurementPm10Atmo,
@@ -42,23 +38,24 @@ const Tabs = (props) => {
     };
   }
 
-  const date = new Date(props.readings[0].Time / 1000000);
-
-  const rows = [
-    TableTemplate(
+  const rows = [];
+  console.log(props.readings);
+  // eslint-disable-next-line array-callback-return
+  props.readings.map((element) => {
+    const date = new Date(element.Time / 1000000);
+    const row = TableTemplate(
       date.toLocaleString(),
-      props.readings[0].LocationLatitude,
-      props.readings[0].LocationLongitude,
-      props.readings[0].LocationName,
-      props.readings[0].Name,
-      props.readings[0].Pms7003measurementPm10Atmo,
-      props.readings[0].Pms7003measurementPm25Atmo,
-      props.readings[0].Pms7003measurementPm100Atmo,
-      props.readings[0].Bmp280MeasurementTemperature,
-      props.readings[0].Bmp280MeasurementPressure,
-      props.readings[0].Dht11MeasurementHumidity,
-    ),
-  ];
+      element.LocationName,
+      element.Name,
+      element.Pms7003measurementPm10Atmo,
+      element.Pms7003measurementPm25Atmo,
+      element.Pms7003measurementPm100Atmo,
+      Math.round(element.Bmp280MeasurementTemperature),
+      Math.round(element.Bmp280MeasurementPressure),
+      element.Dht11MeasurementHumidity,
+    );
+    rows.push(row);
+  });
 
   const pollutionLevel = () => {
     if (props.readings[0].Pms7003measurementPm10Atmo <= 1) {
@@ -101,13 +98,11 @@ const Tabs = (props) => {
                 <TableRow>
                   <TableCell>Data</TableCell>
                   <TableCell align="right">Time</TableCell>
-                  <TableCell align="right">Location Latitiude</TableCell>
-                  <TableCell align="right">Location Longitude</TableCell>
                   <TableCell align="right">Location Name</TableCell>
                   <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">Pm10</TableCell>
-                  <TableCell align="right">Pm25</TableCell>
-                  <TableCell align="right">Pm100</TableCell>
+                  <TableCell align="right">Pm 1</TableCell>
+                  <TableCell align="right">Pm 2.5</TableCell>
+                  <TableCell align="right">Pm 10</TableCell>
                   <TableCell align="right">Pressure</TableCell>
                   <TableCell align="right">Temperature</TableCell>
                   <TableCell align="right">Humidity</TableCell>
@@ -123,16 +118,26 @@ const Tabs = (props) => {
                       {row.name}
                     </TableCell>
                     <TableCell align="right">{row.time}</TableCell>
-                    <TableCell align="right">{row.locationLatitude}</TableCell>
-                    <TableCell align="right">{row.locationLongitude}</TableCell>
                     <TableCell align="right">{row.locationName}</TableCell>
                     <TableCell align="right">{row.name}</TableCell>
-                    <TableCell align="right">{row.pms7003measurementPm10Atmo}</TableCell>
-                    <TableCell align="right">{row.pms7003measurementPm25Atmo}</TableCell>
-                    <TableCell align="right">{row.pms7003measurementPm100Atmo}</TableCell>
-                    <TableCell align="right">{row.bmp280MeasurementPressure}</TableCell>
-                    <TableCell align="right">{row.bmp280MeasurementTemperature}</TableCell>
-                    <TableCell align="right">{row.dht11MeasurementHumidity}</TableCell>
+                    <TableCell align="right">
+                      {row.pms7003measurementPm10Atmo}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.pms7003measurementPm25Atmo}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.pms7003measurementPm100Atmo}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.bmp280MeasurementPressure}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.bmp280MeasurementTemperature}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.dht11MeasurementHumidity}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -170,9 +175,9 @@ const Tabs = (props) => {
     },
     {
       id: 2,
-      tabTitle: 'My Devices',
-      title: 'Title 2',
-      content: 'Contenido de tab 2.',
+      tabTitle: 'Discount Data',
+      title: 'Discount Data',
+      content: 'IN DEVELOPMENT',
     },
   ];
 

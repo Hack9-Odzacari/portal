@@ -47,6 +47,7 @@ function Home() {
 
   const [readings, setReadings] = useState([
     {
+      Country: 'Serbia',
       Time: '1653550921992152181',
       LocationLatitude: '52.368515464923036',
       LocationLongitude: '4.905746869314592',
@@ -61,6 +62,7 @@ function Home() {
     },
   ]);
   const [lastUpdateDate, setLastUpdateDate] = useState([]);
+  const [country, setCountry] = useState([]);
 
   // useEffect(() => {
   //   if (Object.keys(states).length === 0) {
@@ -123,9 +125,10 @@ function Home() {
   const getData = () => {
     axios
       .get(
-        'https://py2qxhv9vk.execute-api.eu-central-1.amazonaws.com/default/milosstack-HelloWorldFunction-eBx9wegwNeT2',
+        'https://py2qxhv9vk.execute-api.eu-central-1.amazonaws.com/default/amsterdam',
       )
       .then((response) => {
+        console.log(response);
         const utcSeconds = response.data[0].Time;
         // console.log(utcSeconds);
         const date = new Date(utcSeconds / 1000000);
@@ -170,9 +173,6 @@ function Home() {
               </option>
             ))}
           </select>
-          <button type="button" onClick={getData}>
-            Get
-          </button>
         </div>
 
         <div>
